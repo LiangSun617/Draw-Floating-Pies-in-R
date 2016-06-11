@@ -1,0 +1,180 @@
+---
+title: "Floating pie"
+author: "Liang Sun"
+date: "January 26, 2016"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+ 
+###1. loading file
+```{r}
+setwd("C:/Users/Liang/Desktop/R working folder")
+data_file = read.csv("data.csv",header=TRUE)
+str(data_file)
+
+```
+
+###2.set up colors for pie slices
+```{r}
+colors=c("coral1","cornflowerblue")
+ 
+```
+
+###3.set margins
+```{r}
+par(mar=c(5.1,4.1,5.1,13.1))
+
+```
+
+###4.plot (gender)
+```{r}
+library(plotrix)
+plot.new()
+plot(data_file$cognit,data_file$yrsqual,
+     xlab="Mean Cognitive Scores",ylab="Mean Years of Education",
+     main="Mean years of education by mean cognitive score for various occupations",
+     sub="(Note:female percentage is indicated for each pie chart)",cex=0.8,
+     xlim=c(400,620),ylim=c(10,20))
+
+legend(630,20,xpd=TRUE, c("A.Professional and related occupations","",
+                          "B.Management, Business,and finance","",
+                          "C.Production","",
+                          "D.Service occupations","",
+                          "E.Office and administrative support","",
+                          "F.Transportation and material moving","",
+                          "G.Installation, maintenance, and repair","",
+                          "H.Construction and extraction","",
+                          "I.Farming, fishing, and forestry","",
+                          "J.Sales and related"),cex=0.7)
+mtext("Female vs. Male")
+#creat pies 
+ x_off = c(4,5,-4,-4,-4,-9,5,-4,-3,-2) 
+ y_off = c(500,410,600,410,-410,410,400,410,-410,410) 
+ltr = c("A","B","C","D","E","F","G","H","I")
+pct<-data_file$nonwhite*100
+lbls<-paste(pct,"%",sep="")
+
+for (i in 1:length(data_file$yrsqual)){
+  floating.pie(data_file$cognit[i],
+               data_file$yrsqual[i],
+               x=c(data_file$female[i],data_file$male[i]),
+               radius=data_file$size[i]/40,
+               col=colors)
+  pie.labels(data_file$cognit[i]+x_off[i],data_file$yrsqual[i]+data_file$size[i]/y_off[i],
+             c(i),labels=lbls[i],
+             cex=0.7)
+
+ }
+
+legend(395, 20, c("Female","Male"),   
+       fill=colors)
+
+text(data_file$cognit[1:9]+4,data_file$yrsqual[1:9]-data_file$size[1:9]/410,ltr[1:9] ,cex=0.8,col="darkgreen")
+text(data_file$cognit[10],data_file$yrsqual[10]+data_file$size[10]/100,"J",cex=0.8,col="darkgreen")
+
+```
+
+-- There are more women than men in occupations with lower mean years of education and cognitive scores
+
+###5.plot (immigrant)
+```{r}
+plot.new()
+
+plot(data_file$cognit,data_file$yrsqual,
+     xlab="Mean Cognitive Scores",ylab="Mean Years of Education",
+     main="Mean years of education by mean cognitive score for various occupations",
+     sub="(Note:immigrant percentage is indicated for each pie chart)",cex=0.8,
+     xlim=c(400,620),ylim=c(10,20))
+
+legend(630,20,xpd=TRUE, c("A.Professional and related occupations","",
+                          "B.Management, Business,and finance","",
+                          "C.Production","",
+                          "D.Service occupations","",
+                          "E.Office and administrative support","",
+                          "F.Transportation and material moving","",
+                          "G.Installation, maintenance, and repair","",
+                          "H.Construction and extraction","",
+                          "I.Farming, fishing, and forestry","",
+                          "J.Sales and related"),cex=0.7)
+mtext("US-born vs. Immigrant")
+
+pct_2<-data_file$immi*100
+lbls_2<-paste(pct_2,"%",sep="")
+
+x_off = c(4,5,-4,-4,-4,-9,5,-4,-3,-2) 
+y_off = c(500,410,600,410,-410,410,400,410,-410,410) 
+ltr = c("A","B","C","D","E","F","G","H","I")
+
+for (i in 1:length(data_file$yrsqual)){
+  floating.pie(data_file$cognit[i],
+               data_file$yrsqual[i],
+               x=c(data_file$immi[i],data_file$usborn[i]),
+               radius=data_file$size[i]/40,
+               col=colors)
+  pie.labels(data_file$cognit[i]+x_off[i],data_file$yrsqual[i]+data_file$size[i]/y_off[i],
+             c(i),labels=lbls_2[i],
+             cex=0.7)
+
+ }
+
+legend(395, 20, c("Immigrant","US-born"),   
+       fill=colors)
+
+text(data_file$cognit[1:9]+4,data_file$yrsqual[1:9]-data_file$size[1:9]/410,ltr[1:9] ,cex=0.8,col="darkgreen")
+text(data_file$cognit[10],data_file$yrsqual[10]+data_file$size[10]/100,"J",cex=0.8,col="darkgreen")
+
+```
+
+-There are more immigrants than US-born in occupations with lower mean years of education and cognitive scores.
+
+###6.plot(race)
+```{r}
+plot.new()
+
+plot(data_file$cognit,data_file$yrsqual,
+     xlab="Mean Cognitive Scores",ylab="Mean Years of Education",
+     main="Mean years of education by mean cognitive score for various occupations",
+     sub="(Note:non-White percentage is indicated for each pie chart)",cex=0.8,
+     xlim=c(400,620),ylim=c(10,20))
+
+legend(630,20,xpd=TRUE, c("A.Professional and related occupations","",
+                          "B.Management, Business,and finance","",
+                          "C.Production","",
+                          "D.Service occupations","",
+                          "E.Office and administrative support","",
+                          "F.Transportation and material moving","",
+                          "G.Installation, maintenance, and repair","",
+                          "H.Construction and extraction","",
+                          "I.Farming, fishing, and forestry","",
+                          "J.Sales and related"),cex=0.7)
+mtext("White vs. non-White")
+
+pct_3<-data_file$nonwhite*100
+lbls_3<-paste(pct_3,"%",sep="")
+
+x_off = c(4,5,-4,-4,-4,-9,5,-4,-3,-2) 
+y_off = c(500,410,600,410,-410,410,400,410,-410,410) 
+ltr = c("A","B","C","D","E","F","G","H","I")
+
+for (i in 1:length(data_file$yrsqual)){
+  floating.pie(data_file$cognit[i],
+               data_file$yrsqual[i],
+               x=c(data_file$nonwhite[i],data_file$white[i]),
+               radius=data_file$size[i]/40,
+               col=colors)
+  pie.labels(data_file$cognit[i]+x_off[i],data_file$yrsqual[i]+data_file$size[i]/y_off[i],
+             c(i),labels=lbls_3[i],
+             cex=0.7)
+
+ }
+
+legend(395, 20, c("non-White","White"),   
+       fill=colors)
+
+text(data_file$cognit[1:9]+4,data_file$yrsqual[1:9]-data_file$size[1:9]/410,ltr[1:9] ,cex=0.8,col="darkgreen")
+text(data_file$cognit[10],data_file$yrsqual[10]+data_file$size[10]/100,"J",cex=0.8,col="darkgreen")
+
+```
+
+-There are more non-White than White in occupations with lower mean years of education and cognitive scores.
