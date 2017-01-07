@@ -75,7 +75,7 @@ legend(395, 20, c("Female","Male"),
 text(data_file$cognit[1:2]+4,data_file$yrsqual[1:2]-data_file$size[1:2]/410,ltr[1:2] ,cex=0.8,col="darkgreen")
 
 ```
-![png](1.png)
+![png](/image/1.png)
 
 - There are more women than men in occupations with lower mean years of education and cognitive scores.
 
@@ -119,7 +119,7 @@ legend(395, 20, c("Immigrant","US-born"),
 text(data_file$cognit[1:2]+4,data_file$yrsqual[1:2]-data_file$size[1:2]/410,ltr[1:2] ,cex=0.8,col="darkgreen")
 
 ```
-![png](2.png)
+![png](/image/2.png)
 
 - There are more immigrants than US-born in occupations with lower mean years of education and cognitive scores.
 
@@ -162,6 +162,6 @@ legend(395, 20, c("non-White","White"),
 text(data_file$cognit[1:2]+4,data_file$yrsqual[1:2]-data_file$size[1:2]/410,ltr[1:2] ,cex=0.8,col="darkgreen")
 
 ```
-![png](3.png)
+![png](/image/3.png)
 
 - There are more non-White than White in occupations with lower mean years of education and cognitive scores.
