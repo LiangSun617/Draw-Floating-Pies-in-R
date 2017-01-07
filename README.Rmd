@@ -14,7 +14,10 @@ fig_caption: true
 fig_crop: false
 
 ---
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+I found floating pies are very useful when you want to visualize the relationship between more than two variables. It is widely used in geographic data visualization, on maps.
+
+Here I use them to show the relationship between level of education and cognitive skills, with pies standing for different occupations, and within each pies gender composition being displayed.
 
 ###1. loading file
 ```{r}
